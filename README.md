@@ -1,12 +1,13 @@
 # Jenkins-Slave Docker-Image
 
-A Jenkins-Slave Docker image including Virtualbox and Hashicorp's Packer &amp; Vagrant pre-installed.
+A Jenkins-Slave Docker image including Virtualbox and Hashicorp's Packer, Vagrant and Git pre-installed.
 
 ## Available Docker Images at DockerHub
 
-Image Name                    | Tag | Jenkins Swarm | Virtualbox | Packer | Vagrant
-------------------------------|-----|---------------|------------|--------|--------
-m00re/jenkins-slave-hashicorp | 2.2 | 2.2           | 5.0.32     | 0.12.2 | 1.9.1
+Image Name                    | Tag   | Jenkins Swarm | Virtualbox | Packer | Vagrant | Git
+------------------------------|-------|---------------|------------|--------|---------|---------
+m00re/jenkins-slave-hashicorp | 2.2.1 | 2.2           | 5.0.32     | 0.12.2 | 1.9.1   | 1.8.3.1
+m00re/jenkins-slave-hashicorp | 2.2   | 2.2           | 5.0.32     | 0.12.2 | 1.9.1   | N/A
 
 See: https://hub.docker.com/r/m00re/jenkins-slave-hashicorp/
 
@@ -36,7 +37,7 @@ docker run \
   -e "SWARM_CLIENT_NAME=" \
   -v /dev/vboxdrv:/dev/vboxdrv \
   --privileged=true \
-  m00re/jenkins-slave-hashicorp:2.2
+  m00re/jenkins-slave-hashicorp:2.2.1
 ```
 
 to spawn a new Jenkins slave docker container with ```2 executors```, Jenkins labels ```vagrant```, ```packer``` and ```virtualbox```, using the Jenkins credentials ```slave/slave```, and connecting to a Jenkins master instance running at ```http://yourjenkinsmasterurl:50000/```.

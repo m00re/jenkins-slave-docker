@@ -15,10 +15,10 @@ ARG VAGRANT_VERSION=1.9.1
 ARG VIRTUALBOX_VERSION=5.0
 
 # Container User
-ARG CONTAINER_USER=jenkinsslave
-ARG CONTAINER_UID=9004
-ARG CONTAINER_GROUP=jenkinsslave
-ARG CONTAINER_GID=9004
+ARG CONTAINER_USER=jenkins
+ARG CONTAINER_UID=1000
+ARG CONTAINER_GROUP=jenkins
+ARG CONTAINER_GID=1000
 
 # Container Internal Environment Variables
 ENV SWARM_HOME=/opt/jenkins-swarm \
@@ -36,6 +36,7 @@ RUN yum install -y \
       gzip \
       wget \
       nano \
+      git \
       java-1.8.0-openjdk-headless
 
 # Install Tini Zombie Reaper And Signal Forwarder
