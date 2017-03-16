@@ -6,6 +6,7 @@ A Jenkins-Slave Docker image including Virtualbox and Hashicorp's Packer, Vagran
 
 Image Name                    | Tag   | Jenkins Swarm | Virtualbox | Packer | Vagrant | Git
 ------------------------------|-------|---------------|------------|--------|---------|---------
+m00re/jenkins-slave-hashicorp | 3.3   | 3.3           | 5.0.32     | 0.12.2 | 1.9.1   | 1.8.3.1
 m00re/jenkins-slave-hashicorp | 2.2.1 | 2.2           | 5.0.32     | 0.12.2 | 1.9.1   | 1.8.3.1
 m00re/jenkins-slave-hashicorp | 2.2   | 2.2           | 5.0.32     | 0.12.2 | 1.9.1   | N/A
 
@@ -28,7 +29,7 @@ Simply type
 ```
 docker run \
   -e "SWARM_VM_PARAMETERS=" \
-  -e "SWARM_MASTER_URL=http://yourjenkinsmasterurl:50000/" \
+  -e "SWARM_MASTER_URL=http://yourjenkinsmasterurl:8080/" \
   -e "SWARM_VM_PARAMETERS=" \
   -e "SWARM_JENKINS_USER=slave" \
   -e "SWARM_JENKINS_PASSWORD=slave" \
@@ -40,7 +41,7 @@ docker run \
   m00re/jenkins-slave-hashicorp:2.2.1
 ```
 
-to spawn a new Jenkins slave docker container with ```2 executors```, Jenkins labels ```vagrant```, ```packer``` and ```virtualbox```, using the Jenkins credentials ```slave/slave```, and connecting to a Jenkins master instance running at ```http://yourjenkinsmasterurl:50000/```.
+to spawn a new Jenkins slave docker container with ```2 executors```, Jenkins labels ```vagrant```, ```packer``` and ```virtualbox```, using the Jenkins credentials ```slave/slave```, and connecting to a Jenkins master instance running at ```http://yourjenkinsmasterurl:8080/```.
 
 > **NOTE: Please be aware that the above example uses HTTP to connect your slave node to the master node. This is not recommended. Instead, use a setup as provided below, in which master and slave nodes are linked over a virtual private Docker network.**
 

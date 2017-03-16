@@ -2,8 +2,8 @@ FROM centos:7.3.1611
 MAINTAINER Jens Mittag <kontakt@jensmittag.de>
 
 # Jenkins Swarm Version
-ARG SWARM_VERSION=2.2
-ARG SWARM_SHA=731ca367119d4b46421c70367111f4c9902a2cb7
+ARG SWARM_VERSION=3.3
+ARG SWARM_SHA=d3f6c4abd734312698d76652f9deccdf8fa4065d
 
 # Tini Zombie Reaper and Signal Forwarder Version
 ARG TINI_VERSION=0.13.2
@@ -46,13 +46,13 @@ RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION
 # Install Jenkins Swarm-Slave
 RUN mkdir -p ${SWARM_HOME} && \
     wget --directory-prefix=${SWARM_HOME} \
-      https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/${SWARM_VERSION}/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar && \
-    sha1sum ${SWARM_HOME}/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar && \
-    echo "$SWARM_SHA ${SWARM_HOME}/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar" | sha1sum -c - && \
-    mv ${SWARM_HOME}/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar ${SWARM_HOME}/swarm-client-jar-with-dependencies.jar && \
+      https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/${SWARM_VERSION}/swarm-client-${SWARM_VERSION}.jar && \
+    sha1sum ${SWARM_HOME}/swarm-client-${SWARM_VERSION}.jar && \
+    echo "$SWARM_SHA ${SWARM_HOME}/swarm-client-${SWARM_VERSION}.jar" | sha1sum -c - && \
+    mv ${SWARM_HOME}/swarm-client-${SWARM_VERSION}.jar ${SWARM_HOME}/swarm-client.jar && \
     mkdir -p ${SWARM_WORKDIR} && \
     chown -R ${CONTAINER_USER}:${CONTAINER_GROUP} ${SWARM_HOME} ${SWARM_WORKDIR} && \
-    chmod +x ${SWARM_HOME}/swarm-client-jar-with-dependencies.jar
+    chmod +x ${SWARM_HOME}/swarm-client.jar
 
 # Install Hashicorp tools: Packer & Vagrant
 RUN wget --directory-prefix=/tmp https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip && \
