@@ -6,6 +6,7 @@ A Jenkins-Slave Docker image including Virtualbox and Hashicorp's Packer, Vagran
 
 Image Name                    | Tag   | Jenkins Swarm | Virtualbox | Packer | Vagrant | Git
 ------------------------------|-------|---------------|------------|--------|---------|---------
+m00re/jenkins-slave-hashicorp | 3.3.1 | 3.3           | 5.0.32     | 0.12.2 | 1.9.1   | 1.8.3.1
 m00re/jenkins-slave-hashicorp | 3.3   | 3.3           | 5.0.32     | 0.12.2 | 1.9.1   | 1.8.3.1
 m00re/jenkins-slave-hashicorp | 2.2.1 | 2.2           | 5.0.32     | 0.12.2 | 1.9.1   | 1.8.3.1
 m00re/jenkins-slave-hashicorp | 2.2   | 2.2           | 5.0.32     | 0.12.2 | 1.9.1   | N/A
@@ -80,7 +81,7 @@ services:
 
   # Jenkins Slave
   slave:
-    image: m00re/jenkins-slave-hashicorp:2.2
+    image: m00re/jenkins-slave-hashicorp:3.3.1
     networks:
       - jenkins
     environment:
@@ -91,6 +92,7 @@ services:
       - SWARM_JENKINS_PASSWORD=slave
       - SWARM_CLIENT_EXECUTORS=1
       - SWARM_CLIENT_LABELS=vagrant packer virtualbox
+      - VAGRANT_ADD_CURL_NETRC_HACK=false
     volumes:
       - /dev/vboxdrv:/dev/vboxdrv
     privileged: true
@@ -103,6 +105,12 @@ networks:
   jenkins:
     driver: bridge
 ```
+
+## Vagrant Tweaks
+
+If you would like to tweak the Downloader module of Vagrant, youn can use the environment variable ```VAGRANT_ADD_CURL_NETRC_HACK``` 
+(as version 3.3.1 of the Docker image). If set to ```true``` the Vagrant box downloader adds the flag ```-n``` to the curl
+command, which lets you use ```~/.netrc``` files.
 
 ## Acknowledgements
 

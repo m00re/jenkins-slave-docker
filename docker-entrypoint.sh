@@ -52,6 +52,10 @@ unset SWARM_JENKINS_USER
 unset SWARM_JENKINS_PASSWORD
 unset SWARM_MASTER_URL
 
+if [ "${VAGRANT_ADD_CURL_NETRC_HACK}" == "true" ]; then
+    sed -i "s/options << \"--location-trusted\" if @location_trusted/options << \"--location-trusted\" if @location_trusted\noptions << \"-n\"/g" /opt/vagrant/embedded/gems/gems/vagrant-${VAGRANT_VERSION}/lib/vagrant/util/downloader.rb
+fi
+
 jenkins_workdir="-fsroot "${SWARM_WORKDIR}
 
 if [ "$1" = 'swarm' ]; then
