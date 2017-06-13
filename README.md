@@ -6,6 +6,7 @@ A Jenkins-Slave Docker image including Virtualbox and Hashicorp's Packer, Vagran
 
 Image Name                    | Tag   | Jenkins Swarm | Virtualbox | Packer | Vagrant | Git
 ------------------------------|-------|---------------|------------|--------|---------|---------
+m00re/jenkins-slave-hashicorp | 3.4   | 3.4           | 5.0.32     | 0.12.2 | 1.9.1   | 1.8.3.1
 m00re/jenkins-slave-hashicorp | 3.3.1 | 3.3           | 5.0.32     | 0.12.2 | 1.9.1   | 1.8.3.1
 m00re/jenkins-slave-hashicorp | 3.3   | 3.3           | 5.0.32     | 0.12.2 | 1.9.1   | 1.8.3.1
 m00re/jenkins-slave-hashicorp | 2.2.1 | 2.2           | 5.0.32     | 0.12.2 | 1.9.1   | 1.8.3.1
