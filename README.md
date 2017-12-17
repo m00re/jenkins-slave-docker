@@ -6,6 +6,7 @@ A Jenkins-Slave Docker image including Virtualbox and Hashicorp's Packer, Vagran
 
 Image Name                    | Tag   | Jenkins Swarm | Virtualbox | Packer | Vagrant | Git
 ------------------------------|-------|---------------|------------|--------|---------|---------
+m00re/jenkins-slave-hashicorp | 3.6   | 3.6           | 5.0.32     | 0.12.2 | 1.9.1   | 1.8.3.1
 m00re/jenkins-slave-hashicorp | 3.4   | 3.4           | 5.0.32     | 0.12.2 | 1.9.1   | 1.8.3.1
 m00re/jenkins-slave-hashicorp | 3.3.1 | 3.3           | 5.0.32     | 0.12.2 | 1.9.1   | 1.8.3.1
 m00re/jenkins-slave-hashicorp | 3.3   | 3.3           | 5.0.32     | 0.12.2 | 1.9.1   | 1.8.3.1
@@ -40,7 +41,7 @@ docker run \
   -e "SWARM_CLIENT_NAME=" \
   -v /dev/vboxdrv:/dev/vboxdrv \
   --privileged=true \
-  m00re/jenkins-slave-hashicorp:2.2.1
+  m00re/jenkins-slave-hashicorp:3.6
 ```
 
 to spawn a new Jenkins slave docker container with ```2 executors```, Jenkins labels ```vagrant```, ```packer``` and ```virtualbox```, using the Jenkins credentials ```slave/slave```, and connecting to a Jenkins master instance running at ```http://yourjenkinsmasterurl:8080/```.
@@ -57,7 +58,7 @@ services:
 
   # Jenkins Master
   jenkins:
-    image: m00re/jenkins-docker:2.32.2-alpine
+    image: m00re/jenkins-docker:2.89.2-alpine
     container_name: jenkins
     hostname: jenkins
     networks:
@@ -82,7 +83,7 @@ services:
 
   # Jenkins Slave
   slave:
-    image: m00re/jenkins-slave-hashicorp:3.3.1
+    image: m00re/jenkins-slave-hashicorp:3.6
     networks:
       - jenkins
     environment:
